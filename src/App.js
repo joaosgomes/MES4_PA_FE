@@ -1,8 +1,24 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import axiosInstance from "./config/config"
 
 function App() {
+
+  React.useEffect(() => {
+    // Fetch events when the component mounts
+    const getStatus = async () => {
+      try {
+        const status = await axiosInstance.get("/live");
+        console.log(status);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getStatus();
+  }, []);
+
   return (
     <div className="App">
       <header className="App-header">

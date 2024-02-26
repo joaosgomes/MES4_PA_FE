@@ -1,8 +1,35 @@
 # MES4 PA
 
+### GitHub Repos:
 
+(BE) https://github.com/joaosgomes/MES4_PA_API
+
+(FE) https://github.com/joaosgomes/MES4_PA_FE
 
 ## API
+
+
+
+### Architecture
+
+
+#### Project Structure
+
+````
+
+├───config
+├───controllers
+├───db
+├───docs
+├───models
+├───public
+│   ├───scripts
+│   └───styles
+├───repository
+├───services
+├───utils
+└───views
+````
 
 ````
 
@@ -11,7 +38,10 @@ go mod init api
 go get github.com/gofiber/fiber/v2
 go get github.com/gofiber/swagger
 go get -u github.com/gofiber/template/html/v2
-
+go get github.com/gofiber/contrib/websocket
+--go get github.com/gofiber/websocket/v2
+--go get github.com/gofiber/websocket
+go get github.com/gofiber/contrib/websocket
 ````
 
 ### Swagger
@@ -32,15 +62,24 @@ go build main.go
 
 go run main.go  //Check if port is not in use
 
+
+
 ````
 
 ### Routes
 
 ````
 http://localhost:5000/
+http://localhost:5000/swagger
 http://localhost:5000/live
 http://localhost:5000/ready
-
+http://localhost:5000/metrics
+http://localhost:5000/event/:id", GetEvent()
+http://localhost:5000/event", GetEvents()
+http://localhost:5000/event", PostEvent()
+http://localhost:5000/event/:id", PutEvent()
+http://localhost:5000/event/:id", DeleteEvent()
+http://localhost:5000/ws/:id", WSHandler()
 ````
 
 
@@ -64,8 +103,17 @@ npm install gh-pages --save-dev
 
 ````
  npm start
+ 
+ npm run deploy
+ 
 
 ````
+
+
+
+### Deploy FE (gh-pages)
+
+https://joaosgomes.github.io/MES4_PA_FE/
 
 
 ### GitHub:
@@ -91,3 +139,10 @@ git remote add origin https://github.com/joaosgomes/MES4_PA_FE.git
 git push -u origin main
 
 ````
+
+
+
+## References:
+
+https://chat.openai.com/
+https://stackoverflow.com/

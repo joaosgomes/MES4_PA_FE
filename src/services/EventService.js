@@ -1,6 +1,6 @@
 // EventService.js
 
-import axiosInstance from "../config/config";
+import axiosInstance from "../config/Config";
 import * as errorMessages from "../constants/ErrorMessages";
 
 // Define API endpoints

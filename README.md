@@ -86,6 +86,24 @@ http://localhost:5000/ws/:id", WSHandler()
 
 ## FE
 
+
+### Architecture
+
+
+#### Project Structure
+
+````
+
+├───components
+│   ├───layouts
+│   ├───pages
+│   └───ui
+├───config
+├───constants
+├───controllers
+└───services
+````
+
 ````
 
 npx create-react-app app --template cra-template-pwa

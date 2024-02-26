@@ -1,5 +1,5 @@
 //WebSocketService.js
-import { USE_WEBSOCKET, WEBSOCKET_BASE_URL } from "../config/config";
+import { USE_WEBSOCKET, WEBSOCKET_BASE_URL } from "../config/Config";
 
 class WebSocketService {
   constructor(eventId, onUpdate) {

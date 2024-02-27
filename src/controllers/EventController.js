@@ -17,6 +17,7 @@ export const fetchEvents = async () => {
     return events;
   } catch (error) {
     console.log(error);
+    throw error;
   }
 };
 
@@ -26,6 +27,7 @@ export const addNewEvent = async (eventData) => {
     return newEvent;
   } catch (error) {
     console.log(error);
+    throw error;
   }
 };
 

@@ -74,12 +74,16 @@ http://localhost:5000/swagger
 http://localhost:5000/live
 http://localhost:5000/ready
 http://localhost:5000/metrics
-http://localhost:5000/event/:id", GetEvent()
+http://localhost:5000/event/:id, GetEvent()
 http://localhost:5000/event", GetEvents()
 http://localhost:5000/event", PostEvent()
-http://localhost:5000/event/:id", PutEvent()
-http://localhost:5000/event/:id", DeleteEvent()
-http://localhost:5000/ws/:id", WSHandler()
+http://localhost:5000/event/:id, PutEvent()
+http://localhost:5000/event/:id, DeleteEvent()
+http://localhost:5000/ws/:id, WSHandler()
+http://localhost:5000/image/:id, .GetImage()
+http://localhost:5000/image, .GetImages()
+http://localhost:5000/image, .PostImage()
+http://localhost:5000/image/:id, .DeleteImage()
 ````
 
 
@@ -113,6 +117,9 @@ npm install axios
 npm install antd --save
 
 npm install gh-pages --save-dev
+
+npm install moment
+
 ````
 
 
@@ -162,5 +169,8 @@ git push -u origin main
 
 ## References:
 
+https://gofiber.io/
 https://chat.openai.com/
 https://stackoverflow.com/
+https://react.dev/
+https://htmx.org/

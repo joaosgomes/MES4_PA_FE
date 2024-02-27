@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Layout, Menu, Button, theme, Switch } from "antd";
+import { getEventsHTML } from "../../controllers/EventController";
 
 import {
   MenuFoldOutlined,
@@ -12,7 +13,7 @@ import {
   MoonFilled,
   SunFilled,
 } from "@ant-design/icons";
-const { Header, Sider, Content, Footer } = Layout;
+const { Header, Sider, Content } = Layout;
 
 const AppLayout = ({ children }) => {
   const [collapsed, setCollapsed] = useState(false);
@@ -20,6 +21,13 @@ const AppLayout = ({ children }) => {
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
+
+  const logoStyle = {
+    height: "32px",
+    margin: "16px",
+    background: "rgba(255, 255, 255, 0.2)",
+    borderRadius: "6px",
+  };
 
   const contentStyle = {
     margin: "24px 16px 0",
@@ -44,14 +52,9 @@ const AppLayout = ({ children }) => {
     minHeight: "100vh",
   };
 
-  const footerStyle = {
-    textAlign: "center",
-    color: "GrayText",
-  };
-
   const menuItems = [
     {
-      label: <Link to="/">New Event</Link>,
+      label: <Link to="/MES4_PA_FE/new-event">New Event</Link>,
       icon: <ExperimentOutlined />,
       key: "1",
     },
@@ -59,11 +62,11 @@ const AppLayout = ({ children }) => {
       label: "Open Events",
       icon: <FireOutlined />,
       key: "2",
-      onClick: () => console.log(""),
+      onClick: () => getEventsHTML(),
     },
     {
       label: (
-        <Link target="_blank" to="https://github.com/joaosgomes/MES4_PA_FE">
+        <Link target="_blank" to="https://github.com/">
           GitHub
         </Link>
       ),
@@ -82,6 +85,9 @@ const AppLayout = ({ children }) => {
         collapsedWidth="0"
         onBreakpoint={(broken) => setCollapsed(broken)}
       >
+        <Link to="/MES4_PA_FE/">
+          <div style={logoStyle} className="demo-logo-vertical" />
+        </Link>
         <br />
 
         <Menu
@@ -101,22 +107,13 @@ const AppLayout = ({ children }) => {
             size="small"
           />
           <Switch
+            //checked={theme === "dark"}
             checkedChildren={<MoonFilled />}
             unCheckedChildren={<SunFilled />}
             size="small"
           />
         </Header>
         <Content style={contentStyle}>{children}</Content>
-        <Footer style={footerStyle}>
-          MES4_PA {new Date().getFullYear()}{" "}
-          <a
-            href="https://github.com/joaosgomes"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Created by @joaosgomes
-          </a>
-        </Footer>
       </Layout>
     </Layout>
   );

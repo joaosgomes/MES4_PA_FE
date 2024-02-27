@@ -10,7 +10,7 @@ const AppRoutes = () => {
       <Route exact path="/MES4_PA_FE" element={<EventList />} />
       <Route path="/MES4_PA_FE/event/:eventId" element={<EventDetail />} />
       <Route path="/MES4_PA_FE/new-event" element={<EventForm />} />
-      <Route path="/MES4_PA_FE/edit-event/:eventId" element={<EventEdit />} /> {/* New route for EditEvent */}
+      <Route path="/MES4_PA_FE/edit-event/:eventId" element={<EventEdit />} />
     </Routes>
   );
 };

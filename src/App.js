@@ -1,7 +1,6 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
-import {axiosInstance} from "./config/Config";
+
 import {
   AppLayout,
   AppRoutes,

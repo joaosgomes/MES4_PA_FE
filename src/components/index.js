@@ -1,5 +1,4 @@
 // components/index.js
-import React from 'react';
 import AppLayout  from './layouts/AppLayout'
 import AppRoutes from './layouts/AppRoutes'
 import EventDetail from './pages/EventDetail'

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { message } from "antd";
 import Navigator_Connection from "../../utils/Navigator_Connection";
 

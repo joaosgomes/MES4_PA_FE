@@ -7,7 +7,7 @@ const endpoint = "/image";
 
 export const getImages = async () => {
   try {
-    if (DEVMODE === "development") {
+    if (DEVMODE === true) {
       return mockImages;
     } else {
       const response = await axiosInstance.get(endpoint);
@@ -21,7 +21,7 @@ export const getImages = async () => {
 
 export const getImage = async (imageId) => {
   try {
-    if (DEVMODE === "development") {
+    if (DEVMODE === true) {
       const image = mockImages.find((img) => img.Id === imageId);
       return image;
     } else {
@@ -36,7 +36,7 @@ export const getImage = async (imageId) => {
 
 export const postImage = async (imageData) => {
   try {
-    if (DEVMODE === "development") {
+    if (DEVMODE === true) {
       mockImages.push(imageData);
       return imageData;
     } else {

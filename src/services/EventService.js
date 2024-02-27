@@ -9,7 +9,7 @@ const templateEndpoint = "events";
 
 export const getEvents = async () => {
   try {
-    if (DEVMODE === "development") {
+    if (DEVMODE === true) {
       return mockEvents;
     } else {
       const response = await axiosInstance.get(endpoint);
@@ -23,7 +23,7 @@ export const getEvents = async () => {
 
 export const getEvent = async (eventId) => {
   try {
-    if (DEVMODE === "development") {
+    if (DEVMODE === true) {
       return mockEvents.find((event) => event.id === eventId);
     } else {
       const response = await axiosInstance.get(`${endpoint}/${eventId}`);
@@ -37,7 +37,7 @@ export const getEvent = async (eventId) => {
 
 export const postEvent = async (eventData) => {
   try {
-    if (DEVMODE === "development") {
+    if (DEVMODE === true) {
       const newEventId = uuidv4();
       const newEvent = { ...eventData, id: newEventId };
       mockEvents.push(newEvent);
@@ -54,11 +54,11 @@ export const postEvent = async (eventData) => {
 
 export const putEvent = async (eventId, eventData) => {
   try {
-    if (DEVMODE === "development") {
+    if (DEVMODE === true) {
       const index = mockEvents.findIndex((event) => event.id === eventId);
 
       if (index === -1) {
-        throw new Error("Event not found");
+        throw new Error(errorMessages.ERROR_UPDATING_EVENT);
       }
 
       mockEvents[index] = { ...mockEvents[index], ...eventData };
@@ -74,11 +74,11 @@ export const putEvent = async (eventId, eventData) => {
 
 export const deleteEvent = async (eventId) => {
   try {
-    if (DEVMODE === "development") {
+    if (DEVMODE === true) {
       const index = mockEvents.findIndex((event) => event.id === eventId);
 
       if (index === -1) {
-        throw new Error("Event not found");
+        throw new Error(errorMessages.ERROR_UPDATING_EVENT);
       }
 
       mockEvents.splice(index, 1);

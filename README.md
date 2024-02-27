@@ -120,6 +120,9 @@ npm install gh-pages --save-dev
 
 npm install moment
 
+npm install uuid
+
+
 ````
 
 

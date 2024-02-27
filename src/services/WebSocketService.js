@@ -1,5 +1,5 @@
 //WebSocketService.js
-import { USE_WEBSOCKET, WEBSOCKET_BASE_URL } from "../config/Config";
+import { USE_WEBSOCKET, WEBSOCKET_BASE_URL } from '../config/Config';
 
 class WebSocketService {
   constructor(eventId, onUpdate) {
@@ -15,7 +15,7 @@ class WebSocketService {
     }
 
     this.socket = new WebSocket(`${WEBSOCKET_BASE_URL}ws/${this.eventId}`);
-
+    
     this.socket.onmessage = (event) => {
       this.onUpdate(event.data);
     };

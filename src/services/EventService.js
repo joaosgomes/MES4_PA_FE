@@ -1,93 +1,119 @@
 // EventService.js
-
-import axiosInstance from "../config/Config";
+import { axiosInstance, DEVMODE } from "../config/Config";
 import * as errorMessages from "../constants/ErrorMessages";
+import { mockEvents } from "./db/MockData"; // Import your mock data module
+import { v4 as uuidv4 } from "uuid";
 
-// Define API endpoints
 const endpoint = "/event";
 const templateEndpoint = "events";
 
-// Function to fetch all events
 export const getEvents = async () => {
   try {
-    const response = await axiosInstance.get(endpoint);
-    return response.data;
+    if (DEVMODE === "development") {
+      return mockEvents;
+    } else {
+      const response = await axiosInstance.get(endpoint);
+      return response.data;
+    }
   } catch (error) {
-    // Log and throw error
     console.error(errorMessages.ERROR_FETCHING_EVENTS, error);
-    // throw error;
+    throw error;
   }
 };
 
-// Function to fetch a single event by ID
 export const getEvent = async (eventId) => {
   try {
-    const response = await axiosInstance.get(`${endpoint}/${eventId}`);
-    return response.data;
+    if (DEVMODE === "development") {
+      return mockEvents.find((event) => event.id === eventId);
+    } else {
+      const response = await axiosInstance.get(`${endpoint}/${eventId}`);
+      return response.data;
+    }
   } catch (error) {
-    // Log and throw error
     console.error(errorMessages.ERROR_FETCHING_EVENT, error);
-    // throw error;
+    throw error;
   }
 };
 
-// Function to create a new event
 export const postEvent = async (eventData) => {
   try {
-    const response = await axiosInstance.post(endpoint, eventData);
-    return response.data;
+    if (DEVMODE === "development") {
+      const newEventId = uuidv4();
+      const newEvent = { ...eventData, id: newEventId };
+      mockEvents.push(newEvent);
+      return newEvent;
+    } else {
+      const response = await axiosInstance.post(endpoint, eventData);
+      return response.data;
+    }
   } catch (error) {
-    // Log and throw error
     console.error(errorMessages.ERROR_CREATING_EVENT, error);
-    // throw error;
+    throw error;
   }
 };
 
-// Function to update an existing event by ID
 export const putEvent = async (eventId, eventData) => {
   try {
-    const response = await axiosInstance.put(`/event/${eventId}`, eventData);
-    return response.data;
+    if (DEVMODE === "development") {
+      const index = mockEvents.findIndex((event) => event.id === eventId);
+
+      if (index === -1) {
+        throw new Error("Event not found");
+      }
+
+      mockEvents[index] = { ...mockEvents[index], ...eventData };
+      return null;
+    } else {
+      const response = await axiosInstance.put(`/event/${eventId}`, eventData); // Concatenate eventId with URL
+      return response.data;
+    }
   } catch (error) {
-    // Log and throw error
     console.error(errorMessages.ERROR_UPDATING_EVENT, error);
-    // throw error;
   }
 };
 
-// Function to delete an event by ID
 export const deleteEvent = async (eventId) => {
   try {
-    await axiosInstance.delete(`${endpoint}/${eventId}`);
+    if (DEVMODE === "development") {
+      const index = mockEvents.findIndex((event) => event.id === eventId);
+
+      if (index === -1) {
+        throw new Error("Event not found");
+      }
+
+      mockEvents.splice(index, 1);
+      return null;
+    } else {
+      await axiosInstance.delete(`${endpoint}/${eventId}`);
+    }
   } catch (error) {
-    // Log and throw error
     console.error(errorMessages.ERROR_DELETING_EVENT, error);
-    // throw error;
+    //throw error;
   }
 };
 
-// Function to fetch HTML content for a specific event
 export const getEventHtml = async (eventId) => {
   try {
-    // Construct URL for fetching HTML content
+    //const response = await axiosInstance.get(`${templateEndpoint}/${eventId}`);
+    //return response.data;
+    // Construct the URL using the base URL and event ID
     const url = `${axiosInstance.defaults.baseURL}${templateEndpoint}/${eventId}`;
     return url;
   } catch (error) {
-    // Log and throw error
     console.error(errorMessages.ERROR_FETCHING_EVENT, error);
-    // throw error;
+    //throw new error
   }
 };
 
-// Function to fetch HTML content for all events
 export const getEventsHtml = async () => {
   try {
-    // Construct URL for fetching HTML content
+    //const response = await axiosInstance.get(`${templateEndpoint}/`);
+    //return response.data;
+    // Construct the URL using the base URL and event ID
     const url = `${axiosInstance.defaults.baseURL}${templateEndpoint}`;
     return url;
   } catch (error) {
-    // Log and throw error
     console.error(errorMessages.ERROR_FETCHING_EVENTS, error);
-    // throw error;
+    //throw new error
   }
 };

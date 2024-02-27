@@ -1,13 +1,18 @@
 // ImageService.js
-import axiosInstance from "../config/Config";
+import {axiosInstance , DEVMODE} from "../config/Config";
 import * as errorMessages from "../constants/ErrorMessages";
+import { mockImages } from "./db/MockData"; // Import your mock data module
 
 const endpoint = "/image";
 
 export const getImages = async () => {
   try {
-    const response = await axiosInstance.get(endpoint);
-    return response.data;
+    if (DEVMODE === "development") {
+      return mockImages;
+    } else {
+      const response = await axiosInstance.get(endpoint);
+      return response.data;
+    }
   } catch (error) {
     console.error(errorMessages.ERROR_IMAGE, error);
     throw error;
@@ -16,8 +21,13 @@ export const getImages = async () => {
 
 export const getImage = async (imageId) => {
   try {
-    const response = await axiosInstance.get(`${endpoint}/${imageId}`);
-    return response.data;
+    if (DEVMODE === "development") {
+      const image = mockImages.find((img) => img.Id === imageId);
+      return image;
+    } else {
+      const response = await axiosInstance.get(`${endpoint}/${imageId}`);
+      return response.data;
+    }
   } catch (error) {
     console.error(errorMessages.ERROR_IMAGE, error);
     //throw error;
@@ -26,8 +36,13 @@ export const getImage = async (imageId) => {
 
 export const postImage = async (imageData) => {
   try {
-    const response = await axiosInstance.post(endpoint, imageData);
-    return response.data;
+    if (DEVMODE === "development") {
+      mockImages.push(imageData);
+      return imageData;
+    } else {
+      const response = await axiosInstance.post(endpoint, imageData);
+      return response.data;
+    }
   } catch (error) {
     console.error(errorMessages.ERROR_IMAGE, error);
     //throw error;
@@ -42,4 +57,3 @@ export const deleteImage = async (imageId) => {
     //throw error;
   }
 };
-

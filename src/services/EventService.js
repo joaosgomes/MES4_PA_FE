@@ -1,5 +1,5 @@
 // EventService.js
-import { axiosInstance, DEVMODE } from "../config/Config";
+import { axiosInstance, DEVMODE } from "../config/Config.js";
 import * as errorMessages from "../constants/ErrorMessages";
 import { mockEvents } from "./db/MockData"; // Import your mock data module
 import { v4 as uuidv4 } from "uuid";

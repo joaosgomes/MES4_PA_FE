@@ -1,8 +1,9 @@
 //AppLayout.js
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Layout, Menu, Button, theme, Switch } from "antd";
 import { getEventsHTML } from "../../controllers/EventController";
+import LocalStorage from "../../utils/LocalStorage"
 
 import {
   MenuFoldOutlined,
@@ -22,19 +23,38 @@ const AppLayout = ({ children }) => {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
 
+  // Retrieve the theme value from localStorage or set "dark" as default
+  const [bgTheme, setBgTheme] = useState(
+    LocalStorage.getItem("theme") || "dark"
+  );
+
+  const handleThemeChange = (checked) => {
+    const newTheme = checked ? "light" : "dark";
+    setBgTheme(newTheme);
+  };
+
+  useEffect(() => {
+    // Save the theme value to localStorage whenever it changes
+    LocalStorage.setItem("theme", bgTheme);
+  }, [bgTheme]);
+
+  const getUpdatedContentStyle = (theme) => {
+    return {
+      margin: "24px 16px 0",
+      padding: 24,
+      minHeight: 280,
+      background: theme === "light" ? "#ffffff" : "#f5f5f5",
+      borderRadius: borderRadiusLG,
+    };
+  };
+
+  const contentStyle = getUpdatedContentStyle(bgTheme);
+
   const logoStyle = {
     height: "32px",
     margin: "16px",
     background: "rgba(255, 255, 255, 0.2)",
     borderRadius: "6px",
-  };
-
-  const contentStyle = {
-    margin: "24px 16px 0",
-    padding: 24,
-    minHeight: 280,
-    background: colorBgContainer,
-    borderRadius: borderRadiusLG,
   };
 
   const buttonStyle = {
@@ -107,10 +127,10 @@ const AppLayout = ({ children }) => {
             size="small"
           />
           <Switch
-            //checked={theme === "dark"}
             checkedChildren={<MoonFilled />}
             unCheckedChildren={<SunFilled />}
             size="small"
+            onChange={handleThemeChange}
           />
         </Header>
         <Content style={contentStyle}>{children}</Content>

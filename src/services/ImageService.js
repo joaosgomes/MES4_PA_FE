@@ -1,5 +1,5 @@
 // ImageService.js
-import {axiosInstance , DEVMODE} from "../config/Config";
+import {axiosInstance , DEVMODE} from "../config/Config.js";
 import * as errorMessages from "../constants/ErrorMessages";
 import { mockImages } from "./db/MockData"; // Import your mock data module
 

@@ -32,11 +32,6 @@
 └───views
 ````
 
-
-
-
-
-
 #### Go Packeges Used
 
 ````console

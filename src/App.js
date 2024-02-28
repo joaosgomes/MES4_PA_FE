@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./App.css";
 
 import {
@@ -13,6 +13,7 @@ function App() {
     <AppLayout>
       <OnlineStatusIndicator />
       <ConnectionStatusMonitor />
+
       <AppRoutes />
     </AppLayout>
   );

@@ -8,4 +8,5 @@ const Navigator_Vibrate = (duration) => {
   }
 };
 
-export default Navigator_Vibrate;
+//export default Navigator_Vibrate;
+export { Navigator_Vibrate };

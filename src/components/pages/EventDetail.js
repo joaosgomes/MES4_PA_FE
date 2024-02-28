@@ -118,7 +118,6 @@ const EventDetail = () => {
           <Descriptions.Item
             layout="horizontal"
             label={<span>Description</span>}
-            span={2}
           >
             <Text type="secondary" copyable>
               {event.description}

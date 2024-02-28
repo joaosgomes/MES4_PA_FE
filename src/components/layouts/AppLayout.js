@@ -85,7 +85,7 @@ const AppLayout = ({ children }) => {
         collapsedWidth="0"
         onBreakpoint={(broken) => setCollapsed(broken)}
       >
-        <Link to="/MES4_PA_FE/">
+        <Link data-c="MES4_PA_FE" aria-label="MES4_PA_FE" to="/MES4_PA_FE">
           <div style={logoStyle} className="demo-logo-vertical" />
         </Link>
         <br />

@@ -121,7 +121,7 @@ function EventList() {
               >
                 <br />
                 <Meta
-                  avatar={<Avatar src={logo} />}
+                  avatar={<Avatar alt="Avatar" src={logo} />}
                   title={event.name}
                   description={event.id}
                 />
